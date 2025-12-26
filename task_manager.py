@@ -7,10 +7,23 @@
 
 
 def hlavni_menu():
-    print(f"\nSprávce úkolů - Hlavní menu\n1. Přidat nový úkol\n2. Zobrazit všechny úkoly\n3. Odstranit úkol\n4. Konec programu")
+    while True:
+        print(f"\nSprávce úkolů - Hlavní menu\n1. Přidat nový úkol\n2. Zobrazit všechny úkoly\n3. Odstranit úkol\n4. Konec programu")
+        volba = input("Vyberte možnost (1-4): ")
+        if volba == "1":
+            pridat_ukol()
+        elif volba == "2":
+            zobrazit_ukoly()
+        elif volba == "3":
+            odstranit_ukol()
+        elif volba == "4":
+            print("\nKonec programu")
+            break
+        else:
+            print("Zadali jste neplatnou volbu, volba musí být od 1 do 4.")
 
 
-def pridat_ukol(ukoly):
+def pridat_ukol():
     novy_ukol = {}
     while True:
         nazev_ukolu = input("\nZadejte název úkolu: ").strip()
@@ -30,7 +43,7 @@ def pridat_ukol(ukoly):
             print(e)
 
 
-def seznam_ukolu(ukoly):
+def zobrazit_ukoly():
     print("\nSeznam úkolů:")
     index = 1
     for ukol in ukoly:
@@ -38,13 +51,12 @@ def seznam_ukolu(ukoly):
         index = index + 1
 
 
-def odstranit_ukol(ukoly):
+def odstranit_ukol():
     if not ukoly:
         print("\nNejsou zatím zadány žádné úkoly.")
         return
-    
     while True:
-        seznam_ukolu(ukoly)
+        zobrazit_ukoly()
         index = input("\nZadejte číslo úkolu, který chcete odstranit: ")
         try:
             if not index.isdigit():
@@ -62,23 +74,6 @@ def odstranit_ukol(ukoly):
             print(e)
 
 
-def main():
-    ukoly = []
-    while True:
-        hlavni_menu()
-        volba = input("Vyberte možnost (1-4): ")
-        if volba == "1":
-            pridat_ukol(ukoly)
-        elif volba == "2":
-            seznam_ukolu(ukoly)
-        elif volba == "3":
-            odstranit_ukol(ukoly)
-        elif volba == "4":
-            print("\nKonec programu")
-            break
-        else:
-            print("Zadali jste neplatnou volbu, volba musí být od 1 do 4.")
-
-
+ukoly = []
 if __name__ == "__main__":
-    main()
+    hlavni_menu()
